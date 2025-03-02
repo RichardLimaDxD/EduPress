@@ -1,0 +1,22 @@
+services:
+  db:
+    image: postgres:17.3
+    restart: always
+    container_name: edu-press
+    ports:
+      - '5432:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: edu-pressdb
+      POSTGRES_USER: bruno
+      POSTGRES_PASSWORD: 1234
+
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -d edu-pressdb -U bruno --quiet']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db-data:

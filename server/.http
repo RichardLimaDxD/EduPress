@@ -1,0 +1,46 @@
+@LOCALHOST = http://localhost:3001
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbmluaG9AbWFpbC5jb20iLCJhZG1pbiI6IlVTRVIiLCJpYXQiOjE3NDA4NjA2ODEsImV4cCI6MTc0MDg2NDI4MSwic3ViIjoiY2JkMWM5YmMtZGQ1NS00ZDhjLTllYWEtNzQxZGM1ZDlhMzcwIn0.RjVe6Tfe0btlHJGFeLQni3LJRW1JQljhXQ6ehujyD6k
+
+################################################################################
+# LOGIN ENDPOINTS
+################################################################################
+
+### login - seller
+POST  {{LOCALHOST}}/login
+Content-Type: application/json
+
+{
+    "email": "toninho@mail.com",
+    "password": "1234"
+}
+
+### login - user
+POST  {{LOCALHOST}}/login
+Content-Type: application/json
+
+{
+    "email": "user@mail.com",
+    "password": "1234"
+}
+
+################################################################################
+# USERS ENDPOINTS
+################################################################################
+
+### - criar usuário
+POST {{LOCALHOST}}/users
+Content-Type: application/json
+
+{
+    "name": "Usuário",
+    "email": "user@mail.com",
+    "password": "1234"
+}
+
+### - busca usuário por token
+GET {{LOCALHOST}}/users
+Content-Type: : application/json
+Authorization: Bearer {{token}}
+
+###
