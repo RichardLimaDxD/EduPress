@@ -4,7 +4,7 @@ import { RegisterForm } from "@/components/pages/auth/forms/register-form";
 const LoginPage = () => {
   return (
     <main className="flex flex-row justify-center items-center">
-      <div className="flex min-h-svh w-full items-center justify-center gap-6 p-6 md:p-10">
+      <div className="flex min-h-svh w-full items-center justify-center gap-10 p-6 md:p-10">
         <div className="w-full max-w-sm">
           <LoginForm />
         </div>

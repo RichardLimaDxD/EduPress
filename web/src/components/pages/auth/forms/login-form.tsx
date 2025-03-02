@@ -39,20 +39,17 @@ const LoginForm = ({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="flex flex-col gap-4">
-          <CardTitle className="text-2xl text-center">Login</CardTitle>
-          <CardDescription className="text-center">
-            Digite seu e-mail abaixo para fazer login em sua conta
-          </CardDescription>
+          <CardTitle className="text-2xl">Login</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(submit)}>
             <div className="flex flex-col gap-8">
               <div className="grid gap-2">
-                <Label htmlFor="email" className="cursor-pointer">
+                <Label htmlFor="email2" className="cursor-pointer">
                   E-mail
                 </Label>
                 <Input
-                  id="email"
+                  id="email2"
                   placeholder="email@example.com"
                   {...register("email")}
                 />
@@ -65,18 +62,12 @@ const LoginForm = ({
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password" className="cursor-pointer">
+                  <Label htmlFor="password2" className="cursor-pointer">
                     Senha
                   </Label>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Esqueceu sua senha?
-                  </a>
                 </div>
                 <Input
-                  id="password"
+                  id="password2"
                   type="password"
                   placeholder="************************"
                   {...register("password")}
@@ -90,10 +81,16 @@ const LoginForm = ({
               </div>
               <Button
                 type="submit"
-                className="cursor-pointer w-full bg-orange-400 hover:bg-orange-600 duration-300"
+                className="cursor-pointer w-full rounded-full bg-orange-400 hover:bg-orange-600 duration-300"
               >
                 Login
               </Button>
+              <a
+                href="#"
+                className="inline-block text-sm underline-offset-4 hover:underline"
+              >
+                Esqueceu sua senha?
+              </a>
             </div>
           </form>
         </CardContent>

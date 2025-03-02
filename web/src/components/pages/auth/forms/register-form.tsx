@@ -39,10 +39,7 @@ const RegisterForm = ({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="flex flex-col gap-4">
-          <CardTitle className="text-2xl text-center">Criar conta</CardTitle>
-          <CardDescription className="text-center">
-            Digite suas informações abaixo para criar sua conta
-          </CardDescription>
+          <CardTitle className="text-2xl">Criar conta</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(submit)}>
@@ -102,7 +99,7 @@ const RegisterForm = ({
               </div>
               <Button
                 type="submit"
-                className="cursor-pointer w-full bg-orange-400 hover:bg-orange-600 duration-300"
+                className="cursor-pointer rounded-full w-full bg-orange-400 hover:bg-orange-600 duration-300"
               >
                 Criar conta
               </Button>

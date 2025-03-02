@@ -48,19 +48,12 @@ const Header = () => {
           </Link>
         </div>
 
-        <div className="flex flex-row justify-center items-center gap-4">
+        <div className="flex flex-row justify-center items-center gap-8">
           <Link
             href={"/login"}
             className="cursor-pointer hover:text-orange-400 hover:scale-105 duration-300"
           >
-            Login
-          </Link>
-          {" / "}
-          <Link
-            href={"/register"}
-            className="cursor-pointer hover:text-orange-400 hover:scale-105 duration-300"
-          >
-            Registrar-se
+            Login / Registrar-se
           </Link>
 
           <Image
