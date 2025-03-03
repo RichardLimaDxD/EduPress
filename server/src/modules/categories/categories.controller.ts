@@ -27,8 +27,6 @@ export class CategoriesController {
     @Body() createCategoryDto: CreateCategoryDto,
     @UserDecorator() user: User,
   ) {
-    console.log('aaa', createCategoryDto);
-    console.log(user);
     return this.categoriesService.create(createCategoryDto, user.roles);
   }
 

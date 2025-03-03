@@ -1,4 +1,5 @@
 import {
+  ConflictException,
   Injectable,
   NotFoundException,
   UnauthorizedException,
@@ -13,7 +14,12 @@ export class CategoriesService {
   constructor(private categoryRepository: CategoryRepository) {}
 
   async create(createCategoryDto: CreateCategoryDto, role: Roles) {
-    console.log('aa', role);
+    const retrieveCategoryByName = await this.categoryRepository.findByName(
+      createCategoryDto.name,
+    );
+
+    if (retrieveCategoryByName)
+      throw new ConflictException('Category already exist.');
 
     if (role != 'SELLER')
       throw new UnauthorizedException('Only sellers can create category');

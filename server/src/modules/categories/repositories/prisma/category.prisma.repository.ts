@@ -21,12 +21,24 @@ export class CategoryPrismaRepository implements CategoryRepository {
   }
 
   async findAll(): Promise<Category[]> {
-    return await this.prisma.category.findMany();
+    return await this.prisma.category.findMany({
+      include: {
+        _count: {
+          select: { course: true },
+        },
+      },
+    });
   }
 
   async findOne(id: string): Promise<Category | null> {
     return await this.prisma.category.findFirst({
       where: { id },
+    });
+  }
+
+  async findByName(name: string): Promise<Category | null> {
+    return await this.prisma.category.findFirst({
+      where: { name },
     });
   }
 

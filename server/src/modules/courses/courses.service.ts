@@ -8,6 +8,7 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { CoursesRepository } from './repositories/courses.repository';
 import { Roles } from '@prisma/client';
+import { Course } from './entities/course.entity';
 
 @Injectable()
 export class CoursesService {
@@ -27,8 +28,8 @@ export class CoursesService {
     return await this.courseRepository.create(data, userId, categoryId);
   }
 
-  async findAll() {
-    await this.courseRepository.findAll();
+  async findAll(): Promise<Course[]> {
+    return await this.courseRepository.findAll();
   }
 
   async findOne(id: string) {

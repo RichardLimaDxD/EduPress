@@ -1,6 +1,6 @@
 @LOCALHOST = http://localhost:3001
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbmluaG9AbWFpbC5jb20iLCJhZG1pbiI6IlNFTExFUiIsImlhdCI6MTc0MDk2ODYxNCwiZXhwIjoxNzQwOTcyMjE0LCJzdWIiOiJjYmQxYzliYy1kZDU1LTRkOGMtOWVhYS03NDFkYzVkOWEzNzAifQ.Ivb-lIwtBJ2HCvyRfdMuOA5FQ69_VLwKBTAYuS5Bk7Y
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbmluaG9AbWFpbC5jb20iLCJyb2xlcyI6IlNFTExFUiIsImlhdCI6MTc0MDk2ODg2MSwiZXhwIjoxNzQwOTcyNDYxLCJzdWIiOiJjYmQxYzliYy1kZDU1LTRkOGMtOWVhYS03NDFkYzVkOWEzNzAifQ.vtKBXikDEcb8ghDpoNz8RXfwUwc3-1X6GgSgwA5tUe8
 
 ################################################################################
 # LOGIN ENDPOINTS
@@ -55,12 +55,46 @@ Authorization: Bearer {{token}}
 # Category ENDPOINTS
 ################################################################################
 
-
-### - create 
+### 
 POST {{LOCALHOST}}/categories
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "Development"
+  "name": "Content Writing"
 }
+
+###
+GET {{LOCALHOST}}/categories
+
+### 
+DELETE  {{LOCALHOST}}/categories/edeccb75-f1a5-4bfa-b297-a9539540555f
+Authorization: Bearer {{token}}
+
+###
+PATCH  {{LOCALHOST}}/categories/c39ffffe-4809-4277-adce-0093ad74c5c6
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Content writing"
+}
+
+################################################################################
+# Courses ENDPOINTS
+################################################################################
+
+###
+POST {{LOCALHOST}}/courses
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "title": "Create An LMS Website With LearnPress",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "price": 10.98,
+    "categoryId": "abe02012-7cd4-47c7-8249-e46467f8d6bc"
+}
+
+###
+GET {{LOCALHOST}}/courses

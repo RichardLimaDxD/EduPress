@@ -24,19 +24,18 @@ export class CoursesController {
   async create(
     @Body() createCourseDto: CreateCourseDto,
     @Request() request: RequestUser,
-    @Param() categoryId: string,
   ) {
     return await this.coursesService.create(
       createCourseDto,
       request.user.id,
       request.user.roles,
-      categoryId,
+      createCourseDto.categoryId,
     );
   }
 
   @Get()
-  findAll() {
-    return this.coursesService.findAll();
+  async findAll() {
+    return await this.coursesService.findAll();
   }
 
   @Get(':id')

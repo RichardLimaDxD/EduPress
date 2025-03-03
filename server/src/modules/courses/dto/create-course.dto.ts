@@ -1,6 +1,7 @@
 import {
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -21,6 +22,10 @@ export class CreateCourseDto {
   @IsNotEmpty()
   price: number;
 
-  @IsNotEmpty()
+  @IsOptional()
   image: string | null;
+
+  @IsNotEmpty()
+  @IsString()
+  categoryId: string;
 }
