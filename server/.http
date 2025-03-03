@@ -1,6 +1,6 @@
 @LOCALHOST = http://localhost:3001
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbmluaG9AbWFpbC5jb20iLCJhZG1pbiI6IlVTRVIiLCJpYXQiOjE3NDA4NjA2ODEsImV4cCI6MTc0MDg2NDI4MSwic3ViIjoiY2JkMWM5YmMtZGQ1NS00ZDhjLTllYWEtNzQxZGM1ZDlhMzcwIn0.RjVe6Tfe0btlHJGFeLQni3LJRW1JQljhXQ6ehujyD6k
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbmluaG9AbWFpbC5jb20iLCJhZG1pbiI6IlNFTExFUiIsImlhdCI6MTc0MDk2ODYxNCwiZXhwIjoxNzQwOTcyMjE0LCJzdWIiOiJjYmQxYzliYy1kZDU1LTRkOGMtOWVhYS03NDFkYzVkOWEzNzAifQ.Ivb-lIwtBJ2HCvyRfdMuOA5FQ69_VLwKBTAYuS5Bk7Y
 
 ################################################################################
 # LOGIN ENDPOINTS
@@ -40,7 +40,27 @@ Content-Type: application/json
 
 ### - busca usuário por token
 GET {{LOCALHOST}}/users
-Content-Type: : application/json
 Authorization: Bearer {{token}}
 
-###
+### - update user role 
+PATCH {{LOCALHOST}}/users/cbd1c9bc-dd55-4d8c-9eaa-741dc5d9a370
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "roles": "SELLER"
+}
+
+################################################################################
+# Category ENDPOINTS
+################################################################################
+
+
+### - create 
+POST {{LOCALHOST}}/categories
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Development"
+}

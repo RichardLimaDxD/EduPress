@@ -13,6 +13,8 @@ export class Course {
 
   userId: string;
 
+  categoryId: string;
+
   createdAt: Date;
   updatedAt: Date;
 

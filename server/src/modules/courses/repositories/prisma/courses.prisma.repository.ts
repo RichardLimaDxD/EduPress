@@ -9,14 +9,18 @@ import { Course } from '../../entities/course.entity';
 export class CoursePrismaRepository implements CoursesRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreateCourseDto, userId: string): Promise<Course> {
+  async create(
+    data: CreateCourseDto,
+    userId: string,
+    categoryId: string,
+  ): Promise<Course> {
     const course = new Course();
     Object.assign(course, {
       ...data,
     });
 
     return await this.prisma.course.create({
-      data: { ...course, userId: userId },
+      data: { ...course, userId: userId, categoryId: categoryId },
     });
   }
 

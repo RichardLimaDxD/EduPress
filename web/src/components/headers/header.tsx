@@ -22,7 +22,7 @@ const Header = () => {
               <Link href={"/"}>Home</Link>
             </li>
             <li className="cursor-pointer hover:text-orange-400 hover:scale-105 duration-300">
-              <Link href={"#"}>Cursos</Link>
+              <Link href={"/courses"}>Cursos</Link>
             </li>
             <li className="cursor-pointer hover:text-orange-400 hover:scale-105 duration-300">
               <Link href={"/"}>Blog</Link>

@@ -13,11 +13,18 @@ import { Roles } from '@prisma/client';
 export class CoursesService {
   constructor(private courseRepository: CoursesRepository) {}
 
-  async create(data: CreateCourseDto, userId: string, role: Roles) {
+  async create(
+    data: CreateCourseDto,
+    userId: string,
+    role: Roles,
+    categoryId: string,
+  ) {
     if (role != 'SELLER')
       throw new UnauthorizedException('Only sellers can create course');
 
-    return await this.courseRepository.create(data, userId);
+    if (!categoryId) throw new NotFoundException('Category not found.');
+
+    return await this.courseRepository.create(data, userId, categoryId);
   }
 
   async findAll() {
@@ -25,6 +32,10 @@ export class CoursesService {
   }
 
   async findOne(id: string) {
+    const findCourse = await this.courseRepository.findOne(id);
+
+    if (!findCourse) throw new NotFoundException('Course not found');
+
     return await this.courseRepository.findOne(id);
   }
 
@@ -51,7 +62,7 @@ export class CoursesService {
       throw new ConflictException('Insufficient permission');
 
     if (role != 'SELLER')
-      throw new UnauthorizedException('Only sellers can create course');
+      throw new UnauthorizedException('Insufficient permission');
 
     return await this.courseRepository.delete(id);
   }
