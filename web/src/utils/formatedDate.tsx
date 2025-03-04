@@ -1,3 +1,4 @@
+"use client";
 import { formatDistanceToNow, parseISO } from "date-fns";
 
 const FormattedDate = ({

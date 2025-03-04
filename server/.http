@@ -1,6 +1,6 @@
 @LOCALHOST = http://localhost:3001
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbmluaG9AbWFpbC5jb20iLCJyb2xlcyI6IlNFTExFUiIsImlhdCI6MTc0MTAyNjA5NywiZXhwIjoxNzQxMDI5Njk3LCJzdWIiOiJjYmQxYzliYy1kZDU1LTRkOGMtOWVhYS03NDFkYzVkOWEzNzAifQ.1iNXnLB4Klk0TRjZba7Wm_iXkXA11EGqJ8a3lTPjnT8
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAbWFpbC5jb20iLCJyb2xlcyI6IlVTRVIiLCJpYXQiOjE3NDExMjI5OTcsImV4cCI6MTc0MTEyNjU5Nywic3ViIjoiNWRmN2E4YzEtM2QzNy00NjBhLThmOTgtZjczMDQ4ZmI4MzhjIn0.Ii1YZNmfqUsvqkX3oDGx6i_Dp0zhLbfZ0FlVoONKnLs
 
 ################################################################################
 # LOGIN ENDPOINTS
@@ -20,7 +20,7 @@ POST  {{LOCALHOST}}/login
 Content-Type: application/json
 
 {
-    "email": "user@mail.com",
+    "email": "teste@mail.com",
     "password": "1234"
 }
 
@@ -50,6 +50,10 @@ Authorization: Bearer {{token}}
 {
     "roles": "SELLER"
 }
+
+### - deletar usuário
+DELETE  {{LOCALHOST}}/users/2280ff01-df9a-4fb6-8c50-96394c6fc701
+Authorization: Bearer {{token}}
 
 ################################################################################
 # Category ENDPOINTS

@@ -1,6 +1,7 @@
 "use client";
 import {
   AuthProps,
+  RequestUpdateUserProps,
   UserRequestProps,
   UsersContextProps,
   UsersProps,
@@ -10,18 +11,18 @@ import { Children } from "@/interfaces/children.interface";
 import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "sonner";
-import Cookies from "js-cookie";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
 
 const UsersContext = createContext({} as UsersContextProps);
 
 const UsersProviders = ({ children }: Children) => {
   const [user, setUser] = useState<UsersProps | null>(null);
+  const cookies = parseCookies();
   const router = useRouter();
 
   const create = async (formData: UserRequestProps) => {
     try {
       await api.post<UserRequestProps>("/users", formData);
-
       toast.success("User created successfully.");
       router.push("/login");
     } catch (error) {
@@ -29,42 +30,98 @@ const UsersProviders = ({ children }: Children) => {
     }
   };
 
-  const seasson = async (formData: AuthProps) => {
+  const session = async (formData: AuthProps) => {
     try {
       const response = await api.post("/login", formData);
 
       const { token } = response.data;
 
-      Cookies.set("token", token, { expires: 1, path: "" });
+      setCookie(null, "token", token);
+
+      await retrieveUserByToken(token);
 
       toast.success("Welcome!");
-
       router.push("/");
     } catch (error) {
       toast.error("Check your user information!");
     }
   };
 
-  const retrieveUserByToken = async () => {
+  const retrieveUserByToken = async (token: string) => {
     try {
-      const token = Cookies.get("token");
-
       const response = await api.get("/users", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
-      const { data } = response;
-
-      setUser(data);
-    } catch (_) {
+      setUser(response.data);
+    } catch (error) {
       logout();
     }
   };
 
+  const deleteAccount = async (id: string) => {
+    try {
+      await api.delete(`/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${cookies["token"]}`,
+        },
+      });
+      toast.success("Your account has been deleted successfully.");
+      logout();
+    } catch {
+      toast.error("Error deleting account.");
+    }
+  };
+
+  const updateUser = async (id: string, formData: RequestUpdateUserProps) => {
+    try {
+      const response = await api.patch(`/users/${id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${cookies["token"]}`,
+        },
+      });
+
+      setUser(response.data);
+      toast.success("Your profile has been updated successfully.");
+    } catch (error) {
+      toast.error("Error updating account.");
+    }
+  };
+
+  const updateUserRole = async (id: string, currentRole: string) => {
+    try {
+      const newRole = currentRole === "USER" ? "SELLER" : "USER";
+
+      const response = await api.patch(
+        `/users/${id}`,
+        { roles: newRole },
+        {
+          headers: {
+            Authorization: `Bearer ${cookies["token"]}`,
+          },
+        }
+      );
+      setUser(response.data);
+      toast.success("Your profile has been updated successfully.");
+    } catch (error) {
+      toast.error("Error updating account.");
+    }
+  };
+
   const logout = () => {
-    Cookies.remove("token");
+    setCookie(null, "token", "", {
+      path: "/",
+
+      maxAge: 0,
+    });
+
+    destroyCookie(null, "token", {
+      path: "/",
+    });
+
+    setUser(null);
 
     toast("Logging out...");
 
@@ -72,18 +129,24 @@ const UsersProviders = ({ children }: Children) => {
   };
 
   useEffect(() => {
-    const token = Cookies.get("token");
-
-    if (token) {
-      retrieveUserByToken();
-    } else {
-      Cookies.remove("token");
+    if (cookies["token"]) {
+      retrieveUserByToken(cookies["token"]);
     }
-  }, []);
+  }, [cookies["token"]]);
 
   return (
     <UsersContext.Provider
-      value={{ user, setUser, seasson, logout, retrieveUserByToken, create }}
+      value={{
+        user,
+        setUser,
+        session,
+        logout,
+        retrieveUserByToken,
+        create,
+        deleteAccount,
+        updateUserRole,
+        updateUser,
+      }}
     >
       {children}
     </UsersContext.Provider>

@@ -7,16 +7,17 @@ import {
 } from "@/interfaces/courses.interface";
 import { Children } from "@/interfaces/children.interface";
 import { createContext, useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import api from "@/service/api";
 import { toast } from "sonner";
+import { parseCookies } from "nookies";
 
 const CoursesContext = createContext({} as CoursesContextProps);
 
 const CoursesProviders = ({ children }: Children) => {
   const [courses, setCourses] = useState<CourseSProps[] | []>([]);
   const [search, setSearch] = useState<string>("");
-  const token = Cookies.get("token");
+  const cookies = parseCookies();
+  const token = cookies["token"];
 
   useEffect(() => {
     getAll();

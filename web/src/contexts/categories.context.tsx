@@ -10,12 +10,14 @@ import { Children } from "@/interfaces/children.interface";
 import { createContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
+import { parseCookies } from "nookies";
 
 const CategoriesContext = createContext({} as CategoriesContextProps);
 
 const CategoriesProviders = ({ children }: Children) => {
   const [categories, setCategories] = useState<CategoriesProps[] | []>([]);
-  const token = Cookies.get("token");
+  const cookies = parseCookies();
+  const token = cookies["token"];
 
   useEffect(() => {
     getAll();

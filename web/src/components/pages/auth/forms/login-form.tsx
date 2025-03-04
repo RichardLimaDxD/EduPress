@@ -29,10 +29,10 @@ const LoginForm = ({
     resolver: zodResolver(authSchema),
   });
 
-  const { seasson } = useUsers();
+  const { session } = useUsers();
 
   const submit = (data: AuthProps) => {
-    seasson(data);
+    session(data);
   };
 
   return (

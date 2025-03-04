@@ -10,7 +10,7 @@ const userSchema = z.object({
     .nonempty({ message: "This field cannot be empty!" }),
   password: z
     .string()
-    .min(8, { message: "This field must contain 8 characters!" })
+    .min(4, { message: "This field must contain 4 characters!" })
     .nonempty({ message: "This field cannot be empty!" }),
   name: z
     .string()
@@ -21,4 +21,6 @@ const userSchema = z.object({
 
 const requestUserSchema = userSchema.omit({ id: true });
 
-export { requestUserSchema, userSchema };
+const requestUpdateUserSchema = userSchema.omit({ id: true, password: true });
+
+export { requestUserSchema, userSchema, requestUpdateUserSchema };

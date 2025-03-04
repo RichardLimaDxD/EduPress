@@ -53,6 +53,7 @@ const PaymentPage = () => {
                 render={({ field }) => (
                   <PatternFormat
                     {...field}
+                    id="cardNumber"
                     format="#### #### #### ####"
                     placeholder="0000 0000 0000 0000"
                     className={errors.cardNumber ? "border-red-500" : ""}
@@ -76,6 +77,7 @@ const PaymentPage = () => {
                   render={({ field }) => (
                     <PatternFormat
                       {...field}
+                      id="expirationDate"
                       format="##/##"
                       placeholder="MM/YY"
                       className={errors.expirationDate ? "border-red-500" : ""}

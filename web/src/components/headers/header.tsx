@@ -1,7 +1,15 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { UserDropdown } from "./navs/user-dropdown";
+import { useUsers } from "@/hooks/users.hook";
+import { useEffect } from "react";
 
 const Header = () => {
+  const { user } = useUsers();
+
+  useEffect(() => {}, [user]);
+
   return (
     <header className="bg-white w-full h-16 flex flex-row justify-center gap-6 items-center shadow-2xl">
       <div className="w-full py-10 px-42 mx-w-7xl mx-auto flex flex-row items-center justify-between">
@@ -49,12 +57,16 @@ const Header = () => {
         </div>
 
         <div className="flex flex-row justify-center items-center gap-8">
-          <Link
-            href={"/login"}
-            className="cursor-pointer hover:text-orange-400 hover:scale-105 duration-300"
-          >
-            Login / Register
-          </Link>
+          {user ? (
+            <UserDropdown user={user} />
+          ) : (
+            <Link
+              href={"/login"}
+              className="cursor-pointer hover:text-orange-400 hover:scale-105 duration-300"
+            >
+              Login / Register
+            </Link>
+          )}
 
           <Image
             src={"/Search.svg"}
