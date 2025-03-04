@@ -1,5 +1,4 @@
 "use client";
-import { Children } from "@/interfaces/children.interface";
 import {
   AuthProps,
   UserRequestProps,
@@ -7,6 +6,7 @@ import {
   UsersProps,
 } from "@/interfaces/users.interface";
 import api from "@/service/api";
+import { Children } from "@/interfaces/children.interface";
 import { useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -22,10 +22,10 @@ const UsersProviders = ({ children }: Children) => {
     try {
       await api.post<UserRequestProps>("/users", formData);
 
-      toast.success("Usuário criado com sucesso.");
+      toast.success("User created successfully.");
       router.push("/login");
     } catch (error) {
-      toast.error("Usuário já existe!");
+      toast.error("User already exists!");
     }
   };
 
@@ -37,11 +37,11 @@ const UsersProviders = ({ children }: Children) => {
 
       Cookies.set("token", token, { expires: 1, path: "" });
 
-      toast.success("Bem vindo!");
+      toast.success("Welcome!");
 
       router.push("/");
     } catch (error) {
-      toast.error("Verifique suas informações de usuário!");
+      toast.error("Check your user information!");
     }
   };
 
@@ -66,7 +66,7 @@ const UsersProviders = ({ children }: Children) => {
   const logout = () => {
     Cookies.remove("token");
 
-    toast("Saindo...");
+    toast("Logging out...");
 
     router.push("/login");
   };

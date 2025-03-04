@@ -39,18 +39,15 @@ const RegisterForm = ({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="flex flex-col gap-4">
-          <CardTitle className="text-2xl">Criar conta</CardTitle>
+          <CardTitle className="text-2xl">Register</CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(submit)}>
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="name" className="cursor-pointer">
-                  Nome
-                </Label>
                 <Input
                   id="name"
-                  placeholder="Digite seu nome..."
+                  placeholder="Your name"
                   {...register("name")}
                 />
                 {errors.name?.message && (
@@ -62,9 +59,6 @@ const RegisterForm = ({
               </div>
 
               <div className="grid gap-2">
-                <Label htmlFor="email" className="cursor-pointer">
-                  E-mail
-                </Label>
                 <Input
                   id="email"
                   placeholder="email@example.com"
@@ -79,11 +73,7 @@ const RegisterForm = ({
               </div>
 
               <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password" className="cursor-pointer">
-                    Senha
-                  </Label>
-                </div>
+                <div className="flex items-center"></div>
                 <Input
                   id="password"
                   type="password"
@@ -101,7 +91,7 @@ const RegisterForm = ({
                 type="submit"
                 className="cursor-pointer rounded-full w-full bg-orange-400 hover:bg-orange-600 duration-300"
               >
-                Criar conta
+                Register
               </Button>
             </div>
           </form>

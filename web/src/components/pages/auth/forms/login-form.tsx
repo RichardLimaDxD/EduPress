@@ -43,11 +43,8 @@ const LoginForm = ({
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(submit)}>
-            <div className="flex flex-col gap-8">
-              <div className="grid gap-2">
-                <Label htmlFor="email2" className="cursor-pointer">
-                  E-mail
-                </Label>
+            <div className="flex flex-col gap-4">
+              <div className="grid gap-1">
                 <Input
                   id="email2"
                   placeholder="email@example.com"
@@ -60,12 +57,8 @@ const LoginForm = ({
                   </p>
                 )}
               </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password2" className="cursor-pointer">
-                    Senha
-                  </Label>
-                </div>
+              <div className="grid gap-1">
+                <div className="flex items-center"></div>
                 <Input
                   id="password2"
                   type="password"
@@ -89,7 +82,7 @@ const LoginForm = ({
                 href="#"
                 className="inline-block text-sm underline-offset-4 hover:underline"
               >
-                Esqueceu sua senha?
+                Lost your password?
               </a>
             </div>
           </form>

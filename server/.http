@@ -1,6 +1,6 @@
 @LOCALHOST = http://localhost:3001
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbmluaG9AbWFpbC5jb20iLCJyb2xlcyI6IlNFTExFUiIsImlhdCI6MTc0MDk2ODg2MSwiZXhwIjoxNzQwOTcyNDYxLCJzdWIiOiJjYmQxYzliYy1kZDU1LTRkOGMtOWVhYS03NDFkYzVkOWEzNzAifQ.vtKBXikDEcb8ghDpoNz8RXfwUwc3-1X6GgSgwA5tUe8
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRvbmluaG9AbWFpbC5jb20iLCJyb2xlcyI6IlNFTExFUiIsImlhdCI6MTc0MTAyNjA5NywiZXhwIjoxNzQxMDI5Njk3LCJzdWIiOiJjYmQxYzliYy1kZDU1LTRkOGMtOWVhYS03NDFkYzVkOWEzNzAifQ.1iNXnLB4Klk0TRjZba7Wm_iXkXA11EGqJ8a3lTPjnT8
 
 ################################################################################
 # LOGIN ENDPOINTS
@@ -68,7 +68,7 @@ Authorization: Bearer {{token}}
 GET {{LOCALHOST}}/categories
 
 ### 
-DELETE  {{LOCALHOST}}/categories/edeccb75-f1a5-4bfa-b297-a9539540555f
+DELETE  {{LOCALHOST}}/categories/6fe7c642-3c55-45ab-8723-b7f0176e01dc
 Authorization: Bearer {{token}}
 
 ###
@@ -92,8 +92,8 @@ Authorization: Bearer {{token}}
 {
     "title": "Create An LMS Website With LearnPress",
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    "price": 10.98,
-    "categoryId": "abe02012-7cd4-47c7-8249-e46467f8d6bc"
+    "price": 1399.99,
+    "categoryId": "c39ffffe-4809-4277-adce-0093ad74c5c6"
 }
 
 ###

@@ -6,16 +6,16 @@ const userSchema = z.object({
   email: z
     .string()
     .trim()
-    .email({ message: "Digite um email valido!" })
-    .nonempty({ message: "Esse campo não pode estar vazio!" }),
+    .email({ message: "Enter a valid email!" })
+    .nonempty({ message: "This field cannot be empty!" }),
   password: z
     .string()
-    .min(2, { message: "Esse campo deve conter 8 caractéres!" })
-    .nonempty({ message: "Esse campo não pode estar vazio!" }),
+    .min(8, { message: "This field must contain 8 characters!" })
+    .nonempty({ message: "This field cannot be empty!" }),
   name: z
     .string()
-    .min(2, { message: "Esse campo deve conter 2 caractéres!" })
-    .nonempty({ message: "Esse campo não pode estar vazio!" }),
+    .min(2, { message: "This field must contain 2 characters!" })
+    .nonempty({ message: "This field cannot be empty!" }),
   roles: z.nativeEnum(Roles).optional().default(Roles.USER),
 });
 

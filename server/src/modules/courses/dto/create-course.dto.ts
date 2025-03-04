@@ -15,7 +15,7 @@ export class CreateCourseDto {
   title: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   description: string;
 
   @IsNumber()

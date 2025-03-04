@@ -22,13 +22,13 @@ const Header = () => {
               <Link href={"/"}>Home</Link>
             </li>
             <li className="cursor-pointer hover:text-orange-400 hover:scale-105 duration-300">
-              <Link href={"/courses"}>Cursos</Link>
+              <Link href={"/courses"}>Courses</Link>
             </li>
             <li className="cursor-pointer hover:text-orange-400 hover:scale-105 duration-300">
               <Link href={"/"}>Blog</Link>
             </li>
             <li className="cursor-pointer hover:text-orange-400 hover:scale-105 duration-300">
-              <Link href={"/"}>Página</Link>
+              <Link href={"/"}>Page</Link>
             </li>
           </ul>
         </div>
@@ -53,7 +53,7 @@ const Header = () => {
             href={"/login"}
             className="cursor-pointer hover:text-orange-400 hover:scale-105 duration-300"
           >
-            Login / Registrar-se
+            Login / Register
           </Link>
 
           <Image

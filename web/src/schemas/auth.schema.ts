@@ -4,13 +4,13 @@ const authSchema = z.object({
   email: z
     .string()
     .trim()
-    .email({ message: "Formato de e-mail inválido." })
-    .nonempty({ message: "Esse campo não pode estar vazio." }),
+    .email({ message: "Invalid email format." })
+    .nonempty({ message: "This field cannot be empty." }),
   password: z
     .string()
     .trim()
-    .min(2, { message: "Esse campo deve conter 3 caractéres!" })
-    .nonempty({ message: "Esse campo não pode estar vazio!" }),
+    .min(3, { message: "This field must contain at least 3 characters!" })
+    .nonempty({ message: "This field cannot be empty!" }),
 });
 
 export default authSchema;
