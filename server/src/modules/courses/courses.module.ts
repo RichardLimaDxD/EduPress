@@ -1,12 +1,30 @@
-import { Module } from '@nestjs/common';
+import { BadRequestException, Module } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 import { CoursesController } from './courses.controller';
 import { PrismaService } from 'src/database/prisma.service';
 import { CoursesRepository } from './repositories/courses.repository';
-import { UserPrismaRepository } from '../users/repositories/prisma/users.prisma.repository';
 import { CoursePrismaRepository } from './repositories/prisma/courses.prisma.repository';
+import { MulterModule } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
 
 @Module({
+  imports: [
+    MulterModule.register({
+      storage: diskStorage({
+        destination: './tmp',
+        filename: (_, file, cb) => {
+          cb(null, file.originalname);
+        },
+      }),
+      fileFilter: (_, file, cb) => {
+        if (file.mimetype === 'video/mp4') {
+          cb(null, true);
+        } else {
+          cb(new BadRequestException('Only mp4 format allowed'), false);
+        }
+      },
+    }),
+  ],
   controllers: [CoursesController],
   providers: [
     CoursesService,

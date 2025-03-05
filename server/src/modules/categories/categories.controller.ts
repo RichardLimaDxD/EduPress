@@ -7,13 +7,11 @@ import {
   Param,
   Delete,
   UseGuards,
-  Request,
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { RequestUser } from '../users/interfaces/users.interface';
 import { UserDecorator } from '../auth/decorators/user.decorator';
 import { User } from '@prisma/client';
 

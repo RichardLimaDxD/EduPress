@@ -11,6 +11,8 @@ export class Course {
 
   image: string | null;
 
+  video_url: string | null;
+
   userId: string;
 
   categoryId: string;

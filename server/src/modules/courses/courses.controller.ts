@@ -8,6 +8,8 @@ import {
   Delete,
   UseGuards,
   Request,
+  UploadedFiles,
+  UploadedFile,
 } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
@@ -55,6 +57,24 @@ export class CoursesController {
       data,
       request.user.id,
       request.user.roles,
+    );
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('upload/:id')
+  async upload(
+    @Request() request: RequestUser,
+    @UploadedFiles()
+    files: { video_url: Express.Multer.File[]; image: Express.Multer.File[] },
+    @Param('id') id: string,
+  ) {
+    const { video_url, image } = files;
+
+    return await this.coursesService.upload(
+      video_url[0],
+      image[0],
+      request.user.roles,
+      id,
     );
   }
 

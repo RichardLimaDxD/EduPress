@@ -25,6 +25,9 @@ export class CreateCourseDto {
   @IsOptional()
   image: string | null;
 
+  @IsOptional()
+  video_url: string | null;
+
   @IsNotEmpty()
   @IsString()
   categoryId: string;

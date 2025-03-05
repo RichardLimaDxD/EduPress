@@ -15,23 +15,37 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import paymentSchema from "@/schemas/payment.schema";
 import { PatternFormat } from "react-number-format";
-import { toast } from "sonner";
+import { useCouses } from "@/hooks/courses.hook";
+import { requestBuyCourseProps } from "@/interfaces/buy-course.interface";
+import { useUsers } from "@/hooks/users.hook";
 
 const PaymentPage = () => {
   const searchParams = useSearchParams();
   const price = searchParams.get("price");
+  const courseId = searchParams.get("courseId");
 
   const {
     control,
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
-  } = useForm({
+  } = useForm<any>({
     resolver: zodResolver(paymentSchema),
-  });
+  }) as any;
 
-  const onSubmit = () => {
-    toast.success("Payment successfully!");
+  const { addCourse } = useCouses();
+
+  const { user } = useUsers();
+
+  const onSubmit = (formData: requestBuyCourseProps) => {
+    const dataToSend = {
+      userId: user?.id!,
+      courseId: courseId!,
+    };
+
+    console.log(dataToSend);
+
+    addCourse(dataToSend);
   };
 
   return (

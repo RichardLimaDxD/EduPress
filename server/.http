@@ -1,6 +1,6 @@
 @LOCALHOST = http://localhost:3001
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAbWFpbC5jb20iLCJyb2xlcyI6IlVTRVIiLCJpYXQiOjE3NDExMjI5OTcsImV4cCI6MTc0MTEyNjU5Nywic3ViIjoiNWRmN2E4YzEtM2QzNy00NjBhLThmOTgtZjczMDQ4ZmI4MzhjIn0.Ii1YZNmfqUsvqkX3oDGx6i_Dp0zhLbfZ0FlVoONKnLs
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAbWFpbC5jb20iLCJyb2xlcyI6IlVTRVIiLCJpYXQiOjE3NDExMzI2NjIsImV4cCI6MTc0MTIxOTA2Miwic3ViIjoiOWI5NWEzYjUtZjZkYi00YjkzLTgxMDgtMTUwZmE1NzkxOTFhIn0.53GuTQOWEH_UyNImhFYTACoyIaCObO-MyaQDyLedHyU
 
 ################################################################################
 # LOGIN ENDPOINTS
@@ -20,7 +20,7 @@ POST  {{LOCALHOST}}/login
 Content-Type: application/json
 
 {
-    "email": "teste@mail.com",
+    "email": "user@mail.com",
     "password": "1234"
 }
 
@@ -102,3 +102,25 @@ Authorization: Bearer {{token}}
 
 ###
 GET {{LOCALHOST}}/courses
+
+################################################################################
+# Buy course ENDPOINTS
+################################################################################
+
+###
+POST {{LOCALHOST}}/buy-course
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "courseId": "815ef041-016b-4d21-b774-4f48ba127bd5" 
+}
+
+### 
+
+GET {{LOCALHOST}}/buy-course
+Authorization: Bearer {{token}}
+
+###
+GET {{LOCALHOST}}/buy-course/3f485eec-f0bb-4c72-af83-8604a421d20b
+Authorization: Bearer {{token}}

@@ -64,7 +64,7 @@ const CourseByIdPage = async ({ params }: CourseByIdPageprops) => {
                 <p className="text-base text-red-500 font-bold">{`$${courseData.price}`}</p>
               </div>
               <Link
-                href={`/courses/${courseData.id}/payment?price=${courseData.price}`}
+                href={`/courses/${courseData.id}/payment?courseId=${courseData.id}&price=${courseData.price}`}
                 className="bg-orange-400 text-white rounded-full p-2 px-4 hover:bg-orange-500 duration-300"
               >
                 Start Now

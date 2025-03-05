@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateVideoDto {
+export class CreateBuyCourseDto {
   @IsNotEmpty()
   @IsString()
-  video_url: string;
+  courseId: string;
 }

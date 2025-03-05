@@ -9,6 +9,8 @@ import { Course } from '../../entities/course.entity';
 export class CoursePrismaRepository implements CoursesRepository {
   constructor(private prisma: PrismaService) {}
 
+  private database: Course[] = [];
+
   async create(
     data: CreateCourseDto,
     userId: string,
@@ -35,6 +37,13 @@ export class CoursePrismaRepository implements CoursesRepository {
   }
 
   async update(id: string, data: UpdateCourseDto): Promise<Course> {
+    return await this.prisma.course.update({
+      where: { id },
+      data: { ...data },
+    });
+  }
+
+  async upload(id: string, data: UpdateCourseDto): Promise<Course> {
     return await this.prisma.course.update({
       where: { id },
       data: { ...data },

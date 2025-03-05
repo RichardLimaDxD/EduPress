@@ -11,5 +11,6 @@ export abstract class CoursesRepository {
   abstract findAll(): Promise<Course[]>;
   abstract findOne(id: string): Promise<Course | null>;
   abstract update(id: string, data: UpdateCourseDto): Promise<Course>;
+  abstract upload(id: string, data: UpdateCourseDto): Promise<Course>;
   abstract delete(id: string): Promise<void>;
 }
