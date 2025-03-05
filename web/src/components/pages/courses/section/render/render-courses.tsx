@@ -39,8 +39,9 @@ const RenderCourses = ({ selectedCategories }: any) => {
               alt="course image"
               width={450}
               height={340}
+              className="rounded-3xl min-w-60"
             />
-            <div className="w-full flex flex-col justify-evenly gap-2 px-5">
+            <div className="w-full flex flex-col p-3 justify-evenly gap-2 px-5">
               <div className="flex flex-col gap-2 mt-12">
                 <h2 className="text-base font-bold">{course.title}</h2>
                 <div className="flex flex-row gap-3 items-center ">

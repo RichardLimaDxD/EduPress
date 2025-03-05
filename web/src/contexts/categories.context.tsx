@@ -21,7 +21,7 @@ const CategoriesProviders = ({ children }: Children) => {
 
   useEffect(() => {
     getAll();
-  }, [categories]);
+  }, []);
 
   const create = async (formData: RequestCategoriesProps) => {
     try {

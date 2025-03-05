@@ -55,6 +55,7 @@ const CourseByIdPage = async ({ params }: CourseByIdPageprops) => {
               alt="course image"
               width={350}
               height={140}
+              className="rounded-2xl"
             />
             <div className="flex flex-row justify-between items-center p-4 px-9">
               <div className="flex flex-row gap-2">

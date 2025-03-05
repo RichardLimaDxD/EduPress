@@ -14,8 +14,8 @@ export class BuyCourseService {
     );
   }
 
-  async findAll(userid: string) {
-    return await this.buyCourseRepository.findAll(userid);
+  async findAll(userId: string) {
+    return await this.buyCourseRepository.findAll(userId);
   }
 
   async findOne(id: string) {

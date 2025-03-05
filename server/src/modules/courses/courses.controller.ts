@@ -9,13 +9,14 @@ import {
   UseGuards,
   Request,
   UploadedFiles,
-  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RequestUser } from '../users/interfaces/users.interface';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
 
 @Controller('courses')
 export class CoursesController {
@@ -61,6 +62,12 @@ export class CoursesController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @UseInterceptors(
+    FileFieldsInterceptor([
+      { name: 'image', maxCount: 1 },
+      { name: 'video_url', maxCount: 1 },
+    ]),
+  )
   @Patch('upload/:id')
   async upload(
     @Request() request: RequestUser,

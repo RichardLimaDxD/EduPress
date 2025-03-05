@@ -22,26 +22,55 @@ const CoursesProviders = ({ children }: Children) => {
   const [courses, setCourses] = useState<CourseSProps[] | []>([]);
   const [purchased, setPurchased] = useState<MyCourseProps[]>([]);
   const [search, setSearch] = useState<string>("");
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const router = useRouter();
   const cookies = parseCookies();
-  const token = cookies["token"];
 
   useEffect(() => {
     getAll();
     getAllPurchased();
-  }, []);
+  }, [cookies["token"]]);
+
+  const upload = async (id: string, video_url: File, image: File) => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${cookies["token"]}`,
+      },
+    };
+
+    const fd = new FormData();
+    if (video_url.name.includes("mp4")) {
+      fd.append("video_url", video_url);
+      fd.append("image", image);
+
+      const status = await api
+        .patch(`/courses/upload/${id}`, fd, config)
+        .then((res) => {
+          return res.status;
+        });
+      toast.success("Success.");
+      return { status, id };
+    }
+    toast.error("Error.");
+    return { status: 400, id };
+  };
 
   const create = async (formData: RequestCoursesProps) => {
     try {
-      await api.post("/courses", formData, {
+      const response = await api.post("/courses", formData, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${cookies["token"]}`,
         },
       });
 
-      toast.success("Course created successfully.");
+      setTimeout(async () => {
+        await upload(response.data.id, videoFile!, imageFile!);
+        await getAll();
+      }, 6000);
     } catch (error) {
-      toast.error("Failed to create course.");
+      toast.error("Error");
     }
   };
 
@@ -63,11 +92,12 @@ const CoursesProviders = ({ children }: Children) => {
     try {
       await api.post("/buy-course", formData, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${cookies["token"]}`,
         },
       });
 
       toast.success("Payment successfully!");
+      getAllPurchased();
       router.push("/my-courses");
     } catch (error) {
       toast.success("Payment error!");
@@ -78,7 +108,7 @@ const CoursesProviders = ({ children }: Children) => {
     try {
       const response = await api.get(`/buy-course`, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${cookies["token"]}`,
         },
       });
       setPurchased(response.data);
@@ -96,6 +126,8 @@ const CoursesProviders = ({ children }: Children) => {
         addCourse,
         getAllPurchased,
         purchased,
+        setVideoFile,
+        setImageFile,
       }}
     >
       {children}

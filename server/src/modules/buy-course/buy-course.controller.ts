@@ -37,7 +37,6 @@ export class BuyCourseController {
   }
 
   @Get(':id')
-  @UseGuards(JwtAuthGuard)
   async findOne(@Param('id') id: string) {
     return await this.buyCourseService.findOne(id);
   }

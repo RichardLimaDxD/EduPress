@@ -38,6 +38,9 @@ export class BuyCoursePrismaRepository implements BuyCourseRepository {
   async findOne(id: string): Promise<MyCourse | null> {
     return await this.prisma.myCourse.findFirst({
       where: { id },
+      include: {
+        course: true,
+      },
     });
   }
 }

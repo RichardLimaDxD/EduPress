@@ -11,8 +11,12 @@ const coursesSchema = z.object({
     .number()
     .min(1, { message: "This field must contain 2 characters!" }),
   image: z.string().optional(),
+  video_url: z.string().optional(),
   categoryId: z.string().nonempty({ message: "This field cannot be empty!" }),
-  userId: z.string().nonempty({ message: "This field cannot be empty!" }),
+  userId: z
+    .string()
+    .nonempty({ message: "This field cannot be empty!" })
+    .optional(),
   createdAt: z.date().optional(),
 });
 

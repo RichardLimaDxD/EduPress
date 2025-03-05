@@ -15,13 +15,14 @@ const RenderCoursesHome = () => {
         <Link key={course.id} href={`courses/${course.id}`}>
           <li
             key={course.id}
-            className="flex flex-col gap-4 border-1 rounded-3xl pb-5 transition-transform hover:shadow-2xl hover:-translate-y-6 duration-300"
+            className="flex flex-col gap-4 border-1 rounded-3xl overflow-hidden pb-5 transition-transform hover:shadow-2xl hover:-translate-y-6 duration-300"
           >
             <Image
               src={course.image ? course.image : "/Image-course.svg"}
               alt="course image"
               width={450}
               height={340}
+              className="rounded-3xl"
             />
             <div className="flex flex-col gap-2 px-4">
               <h2 className="text-base font-bold w-60">{course.title}</h2>

@@ -43,8 +43,6 @@ const PaymentPage = () => {
       courseId: courseId!,
     };
 
-    console.log(dataToSend);
-
     addCourse(dataToSend);
   };
 

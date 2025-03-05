@@ -4,7 +4,6 @@ import { z } from "zod";
 import { MyCourseProps, requestBuyCourseProps } from "./buy-course.interface";
 
 interface CoursesContextProps {
-  create: (formData: RequestCoursesProps) => Promise<void>;
   courses: CourseSProps[] | [];
   getAll: () => Promise<void>;
   search: string;
@@ -12,6 +11,9 @@ interface CoursesContextProps {
   addCourse: (formData: requestBuyCourseProps) => Promise<void>;
   purchased: MyCourseProps[];
   getAllPurchased: () => Promise<void>;
+  create: (formData: RequestCoursesProps) => Promise<void>;
+  setVideoFile: Dispatch<SetStateAction<File | null>>;
+  setImageFile: Dispatch<SetStateAction<File | null>>;
 }
 
 interface CourseByIdPageprops {

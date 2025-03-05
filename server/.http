@@ -1,6 +1,6 @@
 @LOCALHOST = http://localhost:3001
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAbWFpbC5jb20iLCJyb2xlcyI6IlVTRVIiLCJpYXQiOjE3NDExMzI2NjIsImV4cCI6MTc0MTIxOTA2Miwic3ViIjoiOWI5NWEzYjUtZjZkYi00YjkzLTgxMDgtMTUwZmE1NzkxOTFhIn0.53GuTQOWEH_UyNImhFYTACoyIaCObO-MyaQDyLedHyU
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAbWFpbC5jb20iLCJyb2xlcyI6IlVTRVIiLCJpYXQiOjE3NDEyMDU1MzQsImV4cCI6MTc0MTI5MTkzNCwic3ViIjoiOWI5NWEzYjUtZjZkYi00YjkzLTgxMDgtMTUwZmE1NzkxOTFhIn0.qTbrbNHI_y_NpnCt85epGeqdIWsSsI3mllceRtvDq8Q
 
 ################################################################################
 # LOGIN ENDPOINTS
@@ -52,7 +52,7 @@ Authorization: Bearer {{token}}
 }
 
 ### - deletar usuário
-DELETE  {{LOCALHOST}}/users/2280ff01-df9a-4fb6-8c50-96394c6fc701
+DELETE  {{LOCALHOST}}/users/9b95a3b5-f6db-4b93-8108-150fa579191a
 Authorization: Bearer {{token}}
 
 ################################################################################
@@ -122,5 +122,4 @@ GET {{LOCALHOST}}/buy-course
 Authorization: Bearer {{token}}
 
 ###
-GET {{LOCALHOST}}/buy-course/3f485eec-f0bb-4c72-af83-8604a421d20b
-Authorization: Bearer {{token}}
+GET {{LOCALHOST}}/buy-course/cf9dd706-8fe5-4115-a2f2-6f5a5cefa5d0

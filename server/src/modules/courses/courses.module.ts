@@ -17,7 +17,11 @@ import { diskStorage } from 'multer';
         },
       }),
       fileFilter: (_, file, cb) => {
-        if (file.mimetype === 'video/mp4') {
+        if (
+          file.mimetype === 'video/mp4' ||
+          file.mimetype === 'image/webp' ||
+          file.mimetype === 'image/png'
+        ) {
           cb(null, true);
         } else {
           cb(new BadRequestException('Only mp4 format allowed'), false);

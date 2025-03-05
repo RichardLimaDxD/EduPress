@@ -1,20 +1,13 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { useUsers } from "@/hooks/users.hook";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserRequestProps, UsersProps } from "@/interfaces/users.interface";
+import { UserRequestProps } from "@/interfaces/users.interface";
 import { requestUserSchema } from "@/schemas/users.schema";
 
 const RegisterForm = ({
