@@ -25,6 +25,7 @@ interface UsersContextProps {
   deleteAccount: (id: string) => Promise<void>;
   updateUserRole: (id: string, currentRole: string) => Promise<any>;
   updateUser: (id: string, formData: RequestUpdateUserProps) => Promise<void>;
+  retrieveToken: string | null;
 }
 
 export type {

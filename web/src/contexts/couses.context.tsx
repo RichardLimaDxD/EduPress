@@ -15,6 +15,7 @@ import {
   requestBuyCourseProps,
 } from "@/interfaces/buy-course.interface";
 import { useRouter } from "next/navigation";
+import { useUsers } from "@/hooks/users.hook";
 
 const CoursesContext = createContext({} as CoursesContextProps);
 
@@ -26,6 +27,8 @@ const CoursesProviders = ({ children }: Children) => {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const router = useRouter();
   const cookies = parseCookies();
+
+  const { retrieveToken } = useUsers();
 
   let token: string = cookies["token"];
 
@@ -97,9 +100,11 @@ const CoursesProviders = ({ children }: Children) => {
 
   const addCourse = async (formData: requestBuyCourseProps) => {
     try {
+      console.log("reeee", retrieveToken);
+
       await api.post("/buy-course", formData, {
         headers: {
-          Authorization: `Bearer ${cookies["token"]}`,
+          Authorization: `Bearer ${retrieveToken}`,
         },
       });
 

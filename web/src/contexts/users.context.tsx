@@ -17,6 +17,7 @@ const UsersContext = createContext({} as UsersContextProps);
 
 const UsersProviders = ({ children }: Children) => {
   const [user, setUser] = useState<UsersProps | null>(null);
+  const [retrieveToken, setRetrieveToken] = useState<string | null>(null);
   const cookies = parseCookies();
   const router = useRouter();
 
@@ -37,6 +38,8 @@ const UsersProviders = ({ children }: Children) => {
       const { token } = response.data;
 
       setCookie(null, "token", token);
+
+      setRetrieveToken(token);
 
       await retrieveUserByToken(token);
 
@@ -146,6 +149,7 @@ const UsersProviders = ({ children }: Children) => {
         deleteAccount,
         updateUserRole,
         updateUser,
+        retrieveToken,
       }}
     >
       {children}
