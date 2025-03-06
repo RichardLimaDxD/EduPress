@@ -27,10 +27,17 @@ const CoursesProviders = ({ children }: Children) => {
   const router = useRouter();
   const cookies = parseCookies();
 
+  let token: string = cookies["token"];
+
   useEffect(() => {
     getAll();
+
+    if (!token) return;
+
     getAllPurchased();
   }, [cookies["token"]]);
+
+  console.log(cookies["token"], "token");
 
   const upload = async (id: string, video_url: File, image: File) => {
     const config = {
