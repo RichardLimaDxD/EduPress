@@ -40,8 +40,6 @@ const CoursesProviders = ({ children }: Children) => {
     getAllPurchased();
   }, [cookies["token"]]);
 
-  console.log(cookies["token"], "token");
-
   const upload = async (id: string, video_url: File, image: File) => {
     const config = {
       headers: {
@@ -100,8 +98,6 @@ const CoursesProviders = ({ children }: Children) => {
 
   const addCourse = async (formData: requestBuyCourseProps) => {
     try {
-      console.log("reeee", retrieveToken);
-
       await api.post("/buy-course", formData, {
         headers: {
           Authorization: `Bearer ${retrieveToken}`,
