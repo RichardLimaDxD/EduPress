@@ -16,6 +16,7 @@ import {
 } from "@/interfaces/buy-course.interface";
 import { useRouter } from "next/navigation";
 import { useUsers } from "@/hooks/users.hook";
+import { RequestVideoProps, VideoProps } from "@/interfaces/videos.interface";
 
 const CoursesContext = createContext({} as CoursesContextProps);
 
@@ -25,6 +26,12 @@ const CoursesProviders = ({ children }: Children) => {
   const [search, setSearch] = useState<string>("");
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [currentVideo, setCurrentVideo] = useState<VideoProps>(
+    {} as VideoProps
+  );
+  const [videoId, setVideoId] = useState<string>("");
+  const [courseId, setCourseId] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const cookies = parseCookies();
 
@@ -40,7 +47,7 @@ const CoursesProviders = ({ children }: Children) => {
     getAllPurchased();
   }, [cookies["token"]]);
 
-  const upload = async (id: string, video_url: File, image: File) => {
+  const uploadCourse = async (id: string, image: File) => {
     const config = {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -49,8 +56,7 @@ const CoursesProviders = ({ children }: Children) => {
     };
 
     const fd = new FormData();
-    if (video_url.name.includes("mp4")) {
-      fd.append("video_url", video_url);
+    if (image.name.includes("png") || image.name.includes("webp")) {
       fd.append("image", image);
 
       const status = await api
@@ -65,8 +71,10 @@ const CoursesProviders = ({ children }: Children) => {
     return { status: 400, id };
   };
 
-  const create = async (formData: RequestCoursesProps) => {
+  const createCourse = async (formData: RequestCoursesProps) => {
     try {
+      setIsLoading(true);
+
       const response = await api.post("/courses", formData, {
         headers: {
           Authorization: `Bearer ${cookies["token"]}`,
@@ -74,10 +82,53 @@ const CoursesProviders = ({ children }: Children) => {
       });
 
       setTimeout(async () => {
-        await upload(response.data.id, videoFile!, imageFile!);
+        setCourseId(response.data.id);
+        await uploadCourse(response.data.id, imageFile!);
         await getAll();
+        setIsLoading(false);
       }, 6000);
     } catch (error) {
+      setIsLoading(false);
+      toast.error("Error");
+    }
+  };
+
+  const uploadVideo = async (id: string, video: File) => {
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${cookies["token"]}`,
+      },
+    };
+
+    const fd = new FormData();
+    if (video.name.includes("mp4")) {
+      fd.append("video_url", video);
+
+      const status = await api
+        .patch(`/videos/${id}`, fd, config)
+        .then((res) => {
+          return res.status;
+        });
+      toast.success("Success.");
+      return { status, id };
+    }
+    toast.error("Error.");
+    return { status: 400, id };
+  };
+
+  const createVideo = async (formData: RequestVideoProps) => {
+    try {
+      setIsLoading(true);
+      const response = await api.post("/videos", formData);
+
+      setTimeout(async () => {
+        await uploadVideo(response.data.id, videoFile!);
+        await getAllPurchased();
+        setIsLoading(false);
+      }, 6000);
+    } catch (error) {
+      setIsLoading(false);
       toast.error("Error");
     }
   };
@@ -127,7 +178,7 @@ const CoursesProviders = ({ children }: Children) => {
     <CoursesContext.Provider
       value={{
         courses,
-        create,
+        createCourse,
         getAll,
         search,
         setSearch,
@@ -136,6 +187,13 @@ const CoursesProviders = ({ children }: Children) => {
         purchased,
         setVideoFile,
         setImageFile,
+        createVideo,
+        currentVideo,
+        setCurrentVideo,
+        videoId,
+        setVideoId,
+        courseId,
+        isLoading,
       }}
     >
       {children}

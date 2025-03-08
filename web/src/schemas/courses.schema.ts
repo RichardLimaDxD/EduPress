@@ -6,12 +6,9 @@ const coursesSchema = z.object({
     .string()
     .min(1, { message: "This field must contain 2 characters!" })
     .nonempty({ message: "This field cannot be empty!" }),
-  description: z.string().optional(),
-  price: z
-    .number()
-    .min(1, { message: "This field must contain 2 characters!" }),
+  description: z.string().nonempty({ message: "This field cannot be empty!" }),
+  price: z.number().min(0, { message: "The price cannot be negative!" }),
   image: z.string().optional(),
-  video_url: z.string().optional(),
   categoryId: z.string().nonempty({ message: "This field cannot be empty!" }),
   userId: z
     .string()

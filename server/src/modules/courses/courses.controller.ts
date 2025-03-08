@@ -62,27 +62,17 @@ export class CoursesController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @UseInterceptors(
-    FileFieldsInterceptor([
-      { name: 'image', maxCount: 1 },
-      { name: 'video_url', maxCount: 1 },
-    ]),
-  )
+  @UseInterceptors(FileFieldsInterceptor([{ name: 'image', maxCount: 1 }]))
   @Patch('upload/:id')
   async upload(
     @Request() request: RequestUser,
     @UploadedFiles()
-    files: { video_url: Express.Multer.File[]; image: Express.Multer.File[] },
+    files: { image: Express.Multer.File[] },
     @Param('id') id: string,
   ) {
-    const { video_url, image } = files;
+    const { image } = files;
 
-    return await this.coursesService.upload(
-      video_url[0],
-      image[0],
-      request.user.roles,
-      id,
-    );
+    return await this.coursesService.upload(image[0], request.user.roles, id);
   }
 
   @UseGuards(JwtAuthGuard)

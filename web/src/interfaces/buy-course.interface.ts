@@ -17,12 +17,17 @@ interface MyCourseProps {
     title: string;
     description: string;
     price: number;
-    image: string | null;
-    video_url: string | null;
     createdAt: string;
     updatedAt: string;
     userId: string;
     categoryId: string;
+    image: string | null;
+    videos: {
+      id: string;
+      title: string;
+      video_url: string | null;
+      courseId: string;
+    }[];
   };
 }
 

@@ -9,6 +9,7 @@ import { Clock } from "lucide-react";
 import FormattedDate from "@/utils/formatedDate";
 import Image from "next/image";
 import Link from "next/link";
+import CourseDetails from "@/components/pages/courses/section/course-detail";
 
 const CourseByIdPage = async ({ params }: CourseByIdPageprops) => {
   const { id } = await params;
@@ -59,10 +60,14 @@ const CourseByIdPage = async ({ params }: CourseByIdPageprops) => {
             />
             <div className="flex flex-row justify-between items-center p-4 px-9">
               <div className="flex flex-row gap-2">
-                <p className="line-through text-base text-gray-600 opacity-50">{`$${
-                  courseData.price + 10
-                }`}</p>
-                <p className="text-base text-red-500 font-bold">{`$${courseData.price}`}</p>
+                {courseData.price > 0 && (
+                  <p className="line-through text-base text-gray-600 opacity-50">{`$${
+                    courseData.price + 10
+                  }`}</p>
+                )}
+                <p className="text-base text-red-500 font-bold">
+                  {courseData.price === 0 ? "Free" : `$${courseData.price}`}
+                </p>
               </div>
               <Link
                 href={`/courses/${courseData.id}/payment?courseId=${courseData.id}&price=${courseData.price}`}
@@ -74,22 +79,8 @@ const CourseByIdPage = async ({ params }: CourseByIdPageprops) => {
           </div>
         </div>
       </section>
-      <div className="w-full flex flex-col justify-between gap-6 py-12 px-42">
-        <Image
-          src={"/Tab.svg"}
-          alt="tab"
-          width={230}
-          height={230}
-          className="w-[68%]"
-        />
-
-        <Image
-          src={"/LEAVE A COMMENT.svg"}
-          alt="comment"
-          width={100}
-          height={100}
-          className="w-[68%]"
-        />
+      <div className="flex flex-col gap-6 py-28">
+        <CourseDetails courseData={courseData} />
       </div>
     </main>
   );

@@ -1,35 +1,31 @@
 import { PrismaClient } from '@prisma/client';
+import { randomUUID } from 'crypto';
 
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.video.deleteMany();
+  await prisma.course.deleteMany();
+  await prisma.user.deleteMany();
   await prisma.category.deleteMany();
 
-  await prisma.category.createMany({
-    data: [
-      { id: 'abe02012-7cd4-47c7-8249-e46467f8d6bc', name: 'Development' },
-      { id: '5ba2beb0-0760-4e63-8609-1768a85ff2e5', name: 'Finance' },
-      { id: 'cf88362d-7f69-474d-a06a-c7add04e92cc', name: 'Marketing' },
-      { id: '027e9431-1371-4129-8634-6a7e11ba5d98', name: 'Art & Design' },
-      { id: 'd17d9243-523d-42be-9a99-e4b36ffd00f5', name: 'Videography' },
-      { id: '3fce85b6-60e1-4642-a250-4edaa1aa2884', name: 'Photography' },
-      { id: 'f7d26d49-d52e-4fa7-b4fe-0e7e97cb5b4e', name: 'Network' },
-      { id: '0b31a098-df88-4fda-9502-e99af51cd398', name: 'Science' },
-      { id: 'c39ffffe-4809-4277-adce-0093ad74c5c6', name: 'Content writing' },
-    ],
-  });
+  const categories = [
+    { id: randomUUID(), name: 'Development' },
+    { id: randomUUID(), name: 'Finance' },
+    { id: randomUUID(), name: 'Marketing' },
+    { id: randomUUID(), name: 'Art & Design' },
+    { id: randomUUID(), name: 'Videography' },
+    { id: randomUUID(), name: 'Photography' },
+    { id: randomUUID(), name: 'Network' },
+    { id: randomUUID(), name: 'Science' },
+    { id: randomUUID(), name: 'Content Writing' },
+  ];
 
-  await prisma.user.create({
-    data: {
-      name: 'User',
-      email: 'user@mail.com',
-      password: '1234',
-      roles: 'USER',
-    },
-  });
+  await prisma.category.createMany({ data: categories });
 
-  const user2 = await prisma.user.create({
+  const user = await prisma.user.create({
     data: {
+      id: randomUUID(),
       name: 'Juninho',
       email: 'juninho@mail.com',
       password: '1234',
@@ -37,133 +33,123 @@ async function main() {
     },
   });
 
-  await prisma.course.createMany({
-    data: [
-      {
-        title: 'Web Development Course',
-        description: 'Learn how to build responsive and dynamic websites.',
-        price: 199.99,
-        image:
-          'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
-        video_url:
-          'https://res.cloudinary.com/dh3tgxcep/video/upload/v1741202395/b3qvbizowv3wfz0xtetx.mp4',
-        userId: user2.id,
-        categoryId: 'abe02012-7cd4-47c7-8249-e46467f8d6bc',
-      },
-      {
-        title: 'Photography Course',
-        description: 'Become a professional in digital photography.',
-        price: 149.99,
-        image:
-          'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
-        video_url:
-          'https://res.cloudinary.com/dh3tgxcep/video/upload/v1741202395/b3qvbizowv3wfz0xtetx.mp4',
-        userId: user2.id,
-        categoryId: '3fce85b6-60e1-4642-a250-4edaa1aa2884',
-      },
-      {
-        title: 'Advanced JavaScript',
-        description: 'Master JavaScript and become a front-end pro.',
-        price: 299.99,
-        image:
-          'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
-        video_url:
-          'https://res.cloudinary.com/dh3tgxcep/video/upload/v1741202395/b3qvbizowv3wfz0xtetx.mp4',
-        userId: user2.id,
-        categoryId: 'abe02012-7cd4-47c7-8249-e46467f8d6bc',
-      },
-      {
-        title: 'Financial Planning for Beginners',
-        description: 'Learn the basics of managing your personal finances.',
-        price: 99.99,
-        image:
-          'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
-        video_url:
-          'https://res.cloudinary.com/dh3tgxcep/video/upload/v1741202395/b3qvbizowv3wfz0xtetx.mp4',
-        userId: user2.id,
-        categoryId: '5ba2beb0-0760-4e63-8609-1768a85ff2e5',
-      },
-      {
-        title: 'Marketing 101',
-        description: 'Learn the fundamentals of digital marketing.',
-        price: 199.99,
-        image:
-          'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
-        video_url:
-          'https://res.cloudinary.com/dh3tgxcep/video/upload/v1741202395/b3qvbizowv3wfz0xtetx.mp4',
-        userId: user2.id,
-        categoryId: 'cf88362d-7f69-474d-a06a-c7add04e92cc',
-      },
-      {
-        title: 'UI/UX Design for Beginners',
-        description: 'Learn the basics of UI/UX design.',
-        price: 120.0,
-        image:
-          'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
-        video_url:
-          'https://res.cloudinary.com/dh3tgxcep/video/upload/v1741202395/b3qvbizowv3wfz0xtetx.mp4',
-        userId: user2.id,
-        categoryId: '027e9431-1371-4129-8634-6a7e11ba5d98',
-      },
-      {
-        title: 'Photography Masterclass',
-        description: 'Master photography and take stunning photos.',
-        price: 199.99,
-        image:
-          'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
-        video_url:
-          'https://res.cloudinary.com/dh3tgxcep/video/upload/v1741202395/b3qvbizowv3wfz0xtetx.mp4',
-        userId: user2.id,
-        categoryId: '3fce85b6-60e1-4642-a250-4edaa1aa2884',
-      },
-      {
-        title: 'Network Security Essentials',
-        description:
-          'Learn the basics of network security and data protection.',
-        price: 149.99,
-        image:
-          'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
-        video_url:
-          'https://res.cloudinary.com/dh3tgxcep/video/upload/v1741202395/b3qvbizowv3wfz0xtetx.mp4',
-        userId: user2.id,
-        categoryId: 'f7d26d49-d52e-4fa7-b4fe-0e7e97cb5b4e',
-      },
-      {
-        title: 'Content Writing for the Web',
-        description:
-          'Learn how to write engaging content for online platforms.',
-        price: 89.99,
-        image:
-          'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
-        video_url:
-          'https://res.cloudinary.com/dh3tgxcep/video/upload/v1741202395/b3qvbizowv3wfz0xtetx.mp4',
-        userId: user2.id,
-        categoryId: 'c39ffffe-4809-4277-adce-0093ad74c5c6',
-      },
-      {
-        title: 'Science Fundamentals',
-        description: 'An introductory course on basic scientific concepts.',
-        price: 79.99,
-        image:
-          'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
-        video_url:
-          'https://res.cloudinary.com/dh3tgxcep/video/upload/v1741202395/b3qvbizowv3wfz0xtetx.mp4',
-        userId: user2.id,
-        categoryId: '0b31a098-df88-4fda-9502-e99af51cd398',
-      },
-      {
-        title: 'Videography Basics',
-        description: 'Learn the fundamentals of videography and video editing.',
-        price: 129.99,
-        image:
-          'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
-        video_url:
-          'https://res.cloudinary.com/dh3tgxcep/video/upload/v1741202395/b3qvbizowv3wfz0xtetx.mp4',
-        userId: user2.id,
-        categoryId: 'd17d9243-523d-42be-9a99-e4b36ffd00f5',
-      },
-    ],
-  });
+  const courses = [
+    {
+      id: randomUUID(),
+      title: 'Web Development',
+      description: 'Learn to build websites from scratch.',
+      image:
+        'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
+      price: 199.99,
+      userId: user.id,
+      categoryId: categories[0].id,
+    },
+    {
+      id: randomUUID(),
+      title: 'Financial Planning',
+      description: 'Manage your finances effectively.',
+      image:
+        'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
+      price: 99.99,
+      userId: user.id,
+      categoryId: categories[1].id,
+    },
+    {
+      id: randomUUID(),
+      title: 'Social Media Marketing',
+      description: 'Master marketing strategies for social media.',
+      image:
+        'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
+      price: 0,
+      userId: user.id,
+      categoryId: categories[2].id,
+    },
+    {
+      id: randomUUID(),
+      title: 'Graphic Design Basics',
+      description: 'Learn the fundamentals of design.',
+      image:
+        'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
+      price: 79.99,
+      userId: user.id,
+      categoryId: categories[3].id,
+    },
+    {
+      id: randomUUID(),
+      title: 'Video Editing for Beginners',
+      description: 'Edit videos professionally using Premiere Pro.',
+      image:
+        'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
+      price: 129.99,
+      userId: user.id,
+      categoryId: categories[4].id,
+    },
+    {
+      id: randomUUID(),
+      title: 'Photography Essentials',
+      description: 'Take stunning photos with any camera.',
+      image:
+        'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
+      price: 0,
+      userId: user.id,
+      categoryId: categories[5].id,
+    },
+    {
+      id: randomUUID(),
+      title: 'Networking Fundamentals',
+      description: 'Understand computer networks and protocols.',
+      image:
+        'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
+      price: 59.99,
+      userId: user.id,
+      categoryId: categories[6].id,
+    },
+    {
+      id: randomUUID(),
+      title: 'Physics for Beginners',
+      description: 'Explore the basics of physics in a simple way.',
+      image:
+        'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
+      price: 0,
+      userId: user.id,
+      categoryId: categories[7].id,
+    },
+    {
+      id: randomUUID(),
+      title: 'Content Writing Masterclass',
+      description: 'Improve your writing skills for blogs and marketing.',
+      image:
+        'https://res.cloudinary.com/dh3tgxcep/image/upload/v1741202396/sbrraisbwawhwieqa6ep.png',
+      price: 89.99,
+      userId: user.id,
+      categoryId: categories[8].id,
+    },
+  ];
+
+  await prisma.course.createMany({ data: courses });
+
+  const videos = courses.flatMap((course) => [
+    {
+      id: randomUUID(),
+      title: 'Introduction',
+      video_url: 'https://samplelib.com/lib/preview/mp4/sample-5s.mp4',
+      courseId: course.id,
+    },
+    {
+      id: randomUUID(),
+      title: 'Module 1',
+      video_url: 'https://samplelib.com/lib/preview/mp4/sample-10s.mp4',
+      courseId: course.id,
+    },
+    {
+      id: randomUUID(),
+      title: 'Module 2',
+      video_url: 'https://samplelib.com/lib/preview/mp4/sample-15s.mp4',
+      courseId: course.id,
+    },
+  ]);
+
+  await prisma.video.createMany({ data: videos });
 }
 
 main()

@@ -17,14 +17,10 @@ import { diskStorage } from 'multer';
         },
       }),
       fileFilter: (_, file, cb) => {
-        if (
-          file.mimetype === 'video/mp4' ||
-          file.mimetype === 'image/webp' ||
-          file.mimetype === 'image/png'
-        ) {
+        if (file.mimetype === 'image/webp' || file.mimetype === 'image/png') {
           cb(null, true);
         } else {
-          cb(new BadRequestException('Only mp4 format allowed'), false);
+          cb(new BadRequestException('Only webp or png format allowed'), false);
         }
       },
     }),

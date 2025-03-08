@@ -27,9 +27,6 @@ export class CreateUserDto {
   @IsString()
   @MinLength(3)
   @MaxLength(128)
-  @Transform(({ value }: { value: string }) => hashSync(value, 10), {
-    groups: ['transform'],
-  })
   password: string;
 
   @IsEnum(Roles)

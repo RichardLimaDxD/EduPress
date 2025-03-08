@@ -15,7 +15,7 @@ export class UserPrismaRepository implements UsersRepository {
     const users = new User();
     Object.assign(users, {
       ...data,
-      roles: Roles.USER,
+      roles: Roles.SELLER,
     });
 
     const response = await this.prisma.user.create({

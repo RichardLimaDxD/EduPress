@@ -1,6 +1,5 @@
 "use client";
-import { Plus, Save, Upload } from "lucide-react";
-
+import { Loader, Plus, Save, Upload, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -28,19 +27,19 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
-import { useCategories } from "@/hooks/categories.hook";
-import { useCouses } from "@/hooks/courses.hook";
-import { RequestCoursesProps } from "@/interfaces/courses.interface";
 import { useForm } from "react-hook-form";
+import { useCouses } from "@/hooks/courses.hook";
+import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useCategories } from "@/hooks/categories.hook";
 import { requestCourseSchema } from "@/schemas/courses.schema";
-import { useUsers } from "@/hooks/users.hook";
+import { RequestCoursesProps } from "@/interfaces/courses.interface";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { CreateVideosForm } from "./create-videos";
 
 const CreateCoursePanel = () => {
   const { categories } = useCategories();
-  const { create, setImageFile, setVideoFile, courses } = useCouses();
+  const { createCourse, setImageFile, isLoading } = useCouses();
 
   const {
     register,
@@ -52,8 +51,8 @@ const CreateCoursePanel = () => {
     resolver: zodResolver(requestCourseSchema),
   });
 
-  const submitCreateCurse = async (data: RequestCoursesProps) => {
-    await create(data);
+  const submitCreateCourse = async (data: RequestCoursesProps) => {
+    await createCourse(data);
   };
 
   return (
@@ -79,8 +78,24 @@ const CreateCoursePanel = () => {
           </SheetHeader>
 
           <Tabs defaultValue="details" className="flex-1 overflow-auto">
+            <div className="border-b px-6">
+              <TabsList className="w-full justify-start rounded-none border-b-0 p-0">
+                <TabsTrigger
+                  value="details"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent"
+                >
+                  Course
+                </TabsTrigger>
+                <TabsTrigger
+                  value="content"
+                  className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent"
+                >
+                  Video
+                </TabsTrigger>
+              </TabsList>
+            </div>
             <TabsContent value="details" className="p-6 space-y-6">
-              <form onSubmit={handleSubmit(submitCreateCurse)}>
+              <form onSubmit={handleSubmit(submitCreateCourse)}>
                 <Card className="mb-10">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-base">
@@ -108,31 +123,7 @@ const CreateCoursePanel = () => {
                     </div>
                   </CardContent>
                 </Card>
-                <Card className="mb-10">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-base">
-                      Course Thumbnail
-                    </CardTitle>
-                    <CardDescription>Upload a video</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex items-center justify-center h-32 border-2 border-dashed rounded-lg border-muted-foreground/25 cursor-pointer hover:bg-muted/50 transition-colors relative">
-                      <input
-                        type="file"
-                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                        onChange={(e) =>
-                          setVideoFile(
-                            e.target.files ? e.target.files[0] : null
-                          )
-                        }
-                      />
-                      <div className="flex flex-col items-center gap-1 text-muted-foreground pointer-events-none">
-                        <Upload className="h-8 w-8" />
-                        <span>Upload video</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+
                 <div className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="title">Course Title</Label>
@@ -205,11 +196,24 @@ const CreateCoursePanel = () => {
                     type="submit"
                     className="bg-orange-400 hover:bg-orange-600 duration-300 cursor-pointer"
                   >
-                    Save
-                    <Save className="mr-2 h-4 w-4" />
+                    {isLoading ? (
+                      <>
+                        <Loader className="mr-2 h-4 w-4 animate-spin" />
+                        Uploading...
+                      </>
+                    ) : (
+                      <>
+                        Save
+                        <Save className="ml-2 h-4 w-4" />
+                      </>
+                    )}
                   </Button>
                 </div>
               </form>
+            </TabsContent>
+
+            <TabsContent value="content" className="p-6 space-y-6">
+              <CreateVideosForm />
             </TabsContent>
           </Tabs>
 

@@ -1,6 +1,6 @@
 @LOCALHOST = http://localhost:3001
 
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXJAbWFpbC5jb20iLCJyb2xlcyI6IlVTRVIiLCJpYXQiOjE3NDEyMDU1MzQsImV4cCI6MTc0MTI5MTkzNCwic3ViIjoiOWI5NWEzYjUtZjZkYi00YjkzLTgxMDgtMTUwZmE1NzkxOTFhIn0.qTbrbNHI_y_NpnCt85epGeqdIWsSsI3mllceRtvDq8Q
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1bmluaG9AbWFpbC5jb20iLCJyb2xlcyI6IlNFTExFUiIsImlhdCI6MTc0MTM2MDQwNiwiZXhwIjoxNzQxNDQ2ODA2LCJzdWIiOiJkMDNkYzMwNS1kODA1LTQ2ZjItYmYxNi1lNWIwNmE1Mjk1Y2EifQ.6UUTzyQPKlrcB79WvcBGyAhzyHeoeXCZ9QU_zy3MeJ4
 
 ################################################################################
 # LOGIN ENDPOINTS
@@ -11,7 +11,7 @@ POST  {{LOCALHOST}}/login
 Content-Type: application/json
 
 {
-    "email": "toninho@mail.com",
+    "email": "juninho@mail.com",
     "password": "1234"
 }
 
@@ -34,7 +34,7 @@ Content-Type: application/json
 
 {
     "name": "Usuário",
-    "email": "user@mail.com",
+    "email": "juninho1@mail.com",
     "password": "1234"
 }
 
@@ -52,7 +52,7 @@ Authorization: Bearer {{token}}
 }
 
 ### - deletar usuário
-DELETE  {{LOCALHOST}}/users/9b95a3b5-f6db-4b93-8108-150fa579191a
+DELETE  {{LOCALHOST}}/users/fb2f8532-3240-4c4d-9d5e-ee4b7f15eaa1
 Authorization: Bearer {{token}}
 
 ################################################################################
@@ -97,7 +97,7 @@ Authorization: Bearer {{token}}
     "title": "Create An LMS Website With LearnPress",
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
     "price": 1399.99,
-    "categoryId": "c39ffffe-4809-4277-adce-0093ad74c5c6"
+    "categoryId": "7709641d-649d-4616-b026-5475e91cb5f6"
 }
 
 ###
@@ -122,4 +122,19 @@ GET {{LOCALHOST}}/buy-course
 Authorization: Bearer {{token}}
 
 ###
-GET {{LOCALHOST}}/buy-course/cf9dd706-8fe5-4115-a2f2-6f5a5cefa5d0
+GET {{LOCALHOST}}/buy-course/5251b63c-99d8-400e-8d6f-69c666afc26d
+
+###
+POST {{LOCALHOST}}/videos
+Content-Type: application/json
+
+{
+    "title": "full stack python with django rest framework pt - 2",
+	"courseId": "85712942-8dd8-4146-b108-7e354aa90a8a"
+}
+
+###
+GET {{LOCALHOST}}/videos/all/ffa1af30-1b75-4a4e-b481-b34b9a81e247
+
+###
+GET {{LOCALHOST}}/videos/b6627393-3bed-406a-89dd-b5f2b7dab26d

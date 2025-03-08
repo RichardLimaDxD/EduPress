@@ -10,7 +10,7 @@ import { Progress } from "@/components/ui/progress";
 import { useCouses } from "@/hooks/courses.hook";
 
 const MyCoursesRender = () => {
-  const { purchased, search, setSearch, getAllPurchased } = useCouses();
+  const { purchased, search, setSearch } = useCouses();
 
   const filteredCourses = purchased.filter((course) =>
     course.course.title.toLowerCase().includes(search.toLowerCase())
@@ -93,7 +93,7 @@ const MyCoursesRender = () => {
               </CardContent>
               <CardFooter className="p-5 pt-0">
                 <Link
-                  href={`/my-courses/${purchase.id}`}
+                  href={`/my-courses/${purchase.courseId}?videoId=${purchase.course.videos[0].id}`}
                   className="w-full cursor-pointer
                 "
                 >

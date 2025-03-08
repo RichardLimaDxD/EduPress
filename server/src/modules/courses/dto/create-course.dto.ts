@@ -15,18 +15,15 @@ export class CreateCourseDto {
   title: string;
 
   @IsString()
-  @IsOptional()
   description: string;
+
+  @IsString()
+  @IsOptional()
+  image: string | null;
 
   @IsNumber()
   @IsNotEmpty()
   price: number;
-
-  @IsOptional()
-  image: string | null;
-
-  @IsOptional()
-  video_url: string | null;
 
   @IsNotEmpty()
   @IsString()

@@ -9,11 +9,9 @@ export class Course {
 
   price: number;
 
-  image: string | null;
-
-  video_url: string | null;
-
   userId: string;
+
+  image: string | null;
 
   categoryId: string;
 

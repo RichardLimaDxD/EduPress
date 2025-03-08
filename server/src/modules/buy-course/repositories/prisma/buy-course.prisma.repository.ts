@@ -30,7 +30,11 @@ export class BuyCoursePrismaRepository implements BuyCourseRepository {
         userId: userId,
       },
       include: {
-        course: true,
+        course: {
+          include: {
+            videos: true,
+          },
+        },
       },
     });
   }
@@ -39,7 +43,11 @@ export class BuyCoursePrismaRepository implements BuyCourseRepository {
     return await this.prisma.myCourse.findFirst({
       where: { id },
       include: {
-        course: true,
+        course: {
+          include: {
+            videos: true,
+          },
+        },
       },
     });
   }

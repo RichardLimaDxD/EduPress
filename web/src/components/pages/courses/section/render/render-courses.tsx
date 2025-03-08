@@ -52,10 +52,14 @@ const RenderCourses = ({ selectedCategories }: any) => {
               <Separator className="w-full" />
               <div className="flex flex-row justify-between items-center">
                 <div className="flex flex-row gap-4">
-                  <p className="line-through text-base text-gray-600">{`$${
-                    course.price + 10
-                  }`}</p>
-                  <p className="text-base text-green-500">{`$${course.price}`}</p>
+                  {course.price > 0 && (
+                    <p className="line-through text-base text-gray-600">{`$${
+                      course.price + 10
+                    }`}</p>
+                  )}
+                  <p className="text-base text-green-500">
+                    {course.price === 0 ? "Free" : `$${course.price}`}
+                  </p>
                 </div>
                 <h3 className="text-base font-bold">View More</h3>
               </div>
