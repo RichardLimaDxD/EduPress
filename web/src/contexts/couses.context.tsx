@@ -151,7 +151,7 @@ const CoursesProviders = ({ children }: Children) => {
     try {
       await api.post("/buy-course", formData, {
         headers: {
-          Authorization: `Bearer ${retrieveToken}`,
+          Authorization: `Bearer ${cookies["token"]}`,
         },
       });
 

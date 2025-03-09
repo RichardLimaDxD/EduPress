@@ -25,12 +25,25 @@ export class CoursePrismaRepository implements CoursesRepository {
   }
 
   async findAll(): Promise<Course[]> {
-    return await this.prisma.course.findMany();
+    return await this.prisma.course.findMany({
+      include: {
+        user: true,
+        myCourses: true,
+        videos: true,
+        _count: true,
+      },
+    });
   }
 
   async findOne(id: string): Promise<Course | null> {
     return await this.prisma.course.findFirst({
       where: { id },
+      include: {
+        user: true,
+        myCourses: true,
+        videos: true,
+        _count: true,
+      },
     });
   }
 
